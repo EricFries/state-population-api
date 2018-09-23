@@ -7,7 +7,6 @@ from django.db import migrations
 csv_years = [1990, 1980, 1970, 1960, 1950, 1940, 1930, 1920, 1910, 1900]
 
 def seed_from_csv(apps, schema_editor):
-	return
 	State = apps.get_model('states', 'State')
 	HistoricalPopulation = apps.get_model('states', 'HistoricalPopulation')
 
@@ -28,7 +27,6 @@ def seed_from_csv(apps, schema_editor):
 					print('created historical population data: {} - {}'.format(historical_population.year, historical_population.population))
 
 def remove_seed_data(apps, schema_editor):
-	return
 	State = apps.get_model('states', 'State')
 	HistoricalPopulation = apps.get_model('states', 'HistoricalPopulation')
 	State.objects.all().delete()
