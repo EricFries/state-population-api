@@ -1,0 +1,2 @@
+release: python ./population_senate_representation/manage.py migrate
+web: gunicorn population_senate_representation.population_senate_representation.wsgi
