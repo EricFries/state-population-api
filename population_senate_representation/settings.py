@@ -1,14 +1,23 @@
 import os
 import django_heroku
 
-from population_senate_representation.secret_settings import *
+# For local development, secrets (e.g., API Keys) are stored
+# in secret_settings.py.  However, it is not under version
+# control and cannot be imported on production.  For now,
+# simply catch the error and continue since Heroku will
+# provide the missing environment variables.  The better
+# solution is separate settings files per environment.
 
+try:
+    from population_senate_representation.secret_settings import *
+except ModuleNotFoundError:
+    pass
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 
