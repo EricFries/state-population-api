@@ -22,8 +22,10 @@ class HistoricalPopulationViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         queryset = HistoricalPopulation.objects.all()
 
-        # For now exclude DC since it isn't a state (though it should be...)
-        queryset = queryset.exclude(state__name='District of Columbia')
+        # For now exclude Puerto Rico & DC since they aren't states (YET!)
+        queryset = queryset \
+            .exclude(state__name='District of Columbia') \
+            .exclude(state__name='Puerto Rico')
 
         state_name_filter = self.request.query_params.get('state')
         if state_name_filter:
